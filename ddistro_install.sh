@@ -18,10 +18,11 @@ pytorch_gpu_available() {
 }
 
 echo "Install LocalWhisper, this may take a while."
+python -m pip install --no-cache-dir --upgrade pip setuptools wheel
 if pytorch_gpu_available; then
-  python -m pip install --no-cache-dir --upgrade torch --index-url https://download.pytorch.org/whl/cu128
+  python -m pip install --no-cache-dir --upgrade torch --index-url https://download.pytorch.org/whl/cu128 || exit 1
 else
-  python -m pip install --no-cache-dir --upgrade torch --index-url https://download.pytorch.org/whl/cpu
+  python -m pip install --no-cache-dir --upgrade torch --index-url https://download.pytorch.org/whl/cpu || exit 1
 fi
 python -m pip install --no-cache-dir -r requirements.txt
 
